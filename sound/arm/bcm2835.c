@@ -104,9 +104,9 @@ static int snd_bcm2835_alsa_probe(struct platform_device *pdev)
 		goto out;
 
 	snd_card_set_dev(g_card, &pdev->dev);
-	strcpy(g_card->driver, "BRCM bcm2835 ALSA Driver");
-	strcpy(g_card->shortname, "bcm2835 ALSA");
-	sprintf(g_card->longname, "%s", g_card->shortname);
+	strlcpy(g_card->driver, "BRCM bcm2835 ALSA Driver", sizeof(g_card->driver));
+	strlcpy(g_card->shortname, "bcm2835 ALSA", sizeof(g_card->shortname));
+	sprintf(g_card->longname, sizeof(g_card->longname), "%s", g_card->shortname);
 
 	err = snd_bcm2835_create(g_card, pdev, &chip);
 	if (err < 0) {
